@@ -55,12 +55,12 @@
         for (let i = 0; i < group1.length; i++) {
           let fx = 0;
           let fy = 0;
-          let a = group1[1];
+          let a = group1[i];
           for (let j = 0; j < group2.length; j++) {
             let b = group2[j];
             let dx = a.x - b.x;
             let dy = a.y - b.y;
-            let d = Math.sqrt(dx ** 2 * dy ** 2);
+            let d = Math.sqrt(dx ** 2 + dy ** 2);
             if (d > 0 && d < 80) {
               let f = g / d;
               fx += f * dx;
