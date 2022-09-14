@@ -12,7 +12,7 @@
     </style>
   </head>
   <body>
-    <canvas id="life" width="500" height="500"></canvas>
+    <canvas id="life" width="1000" height="1000"></canvas>
 
     <script>
       // Grab canvas
@@ -38,7 +38,7 @@
       };
 
       let randomCoord = () => {
-        return Math.random() * 400 + 50;
+        return Math.random() * 980 + 20;
       };
 
       let create = (number, color) => {
@@ -69,22 +69,79 @@
           }
           a.vx = (a.vx + fx) * 0.5;
           a.vy = (a.vy + fy) * 0.5;
+
+          if (a.x + a.vx >= 990 || a.x + a.vx <= 10) {
+            a.vx *= -1;
+          }
+
+          if (a.y + a.vy >= 990 || a.y + a.vy <= 10) {
+            a.vy *= -1;
+          }
           a.x += a.vx;
           a.y += a.vy;
         }
       };
 
-      let green = create(100, 'green');
+      let green = create(400, 'green');
+      let red = create(400, 'red');
+      let orange = create(400, 'orange');
+      let yellow = create(400, 'yellow');
 
       let drawAll = () => {
-        for (i in atoms) draw(atoms[i].x, atoms[i].y, atoms[i].color, 3);
+        for (i in atoms) draw(atoms[i].x, atoms[i].y, atoms[i].color, 5);
       };
 
       let loop = () => {
-        //update model
-        rule(green, green, -0.05);
+        //update model 1 (Normal Particles)
+        //rule(red, orange, 0.5);
+        //rule(green, green, 0.4);
+        //rule(yellow, yellow, 0.3);
+        //rule(orange, yellow, -4);
+
+        // update model 2 (Super Fast Particles)
+        //rule(green, green, -0.4);
+        //rule(green, yellow, 0.6);
+        //rule(yellow, green, -0.4);
+
+        //rule(red, red, -0.4);
+        //rule(red, orange, 0.6);
+        //rule(orange, red, -0.4);
+
+        //update model 3 (Yellow Stay Away!)
+        //rule(yellow, red, 2);
+        //rule(yellow, green, 2);
+        //rule(yellow, orange, 2);
+
+        //rule(yellow, yellow, -5);
+
+        //rule(red, red, 3);
+        //rule(green, green, 3);
+        //rule(orange, orange, 3);
+
+        //rule(red, red, 2);
+        //rule(green, green, 2);
+        //rule(orange, orange, 2);
+
+        //rule(red, yellow, 2);
+        //rule(green, yellow, 2);
+        //rule(orange, yellow, 2);
+
+        //update model 4 (Defeat the Particles!)
+        //rule(yellow, orange, -3);
+        //rule(green, orange, 3);
+        //rule(red, orange, 3);
+
+        //rule(red, red, -0.1);
+        //rule(yellow, yellow, -0.1);
+        //rule(orange, orange, -0.1);
+
+        //rule(yellow, red, 0.5);
+        //rule(green, yellow, 0.5);
+        //rule(red, green, 1);
+
         //clear screen
-        c.clearRect(0, 0, 500, 500);
+        c.clearRect(0, 0, 1000, 1000);
+
         drawAll();
         requestAnimationFrame(loop);
       };
